@@ -15,7 +15,7 @@ public class Ticket {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@ManyToOne
-	@JoinColumn(name = "event_id")
+	@JoinColumn(name = "event_id", nullable=false)
 	private Event event;
 	private boolean soldFlag;
 	

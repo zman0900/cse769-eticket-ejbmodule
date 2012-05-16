@@ -1,7 +1,7 @@
 package com.cse769.EJB.Entity;
 
 import java.util.List;
-
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,6 +28,8 @@ public class User{
 	private String phone;
 	@OneToMany(targetEntity = FormOfPayment.class, mappedBy = "user", cascade = CascadeType.ALL)
 	private List<FormOfPayment> formOfPayment;
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
+	private Set<Transaction> transactions;
 	
 	public String getUsername() {
 		return username;
@@ -77,6 +79,7 @@ public class User{
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
 	public Long getUserId() {
 		return userId;
 	}
@@ -88,5 +91,12 @@ public class User{
 	}
 	public void setFormOfPayment(List<FormOfPayment> formOfPayment) {
 		this.formOfPayment = formOfPayment;
+	}
+	
+	public Set<Transaction> getTransactions() {
+		return transactions;
+	}
+	public void setTransactions(Set<Transaction> transactions) {
+		this.transactions = transactions;
 	}	
 }
