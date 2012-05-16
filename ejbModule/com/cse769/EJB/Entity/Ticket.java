@@ -9,9 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-
-//@Entity
-
 public class Ticket {
 
 	@Id

@@ -6,6 +6,7 @@
 	   <class>com.cse769.EJB.Entity.Venue</class>
 	   <class>com.cse769.EJB.Entity.Ticket</class>
 	   <class>com.cse769.EJB.Entity.Event</class>
+	   <class>com.cse769.EJB.Entity.PaymentType</class>
 	   <properties>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
        </properties>
