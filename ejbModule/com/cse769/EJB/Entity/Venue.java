@@ -1,29 +1,35 @@
 package com.cse769.EJB.Entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Venue {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Long venueId;
 	private String name;
 	private String description;
 	private String address;
 	private String city;
 	private String state;
 	private String zipCode;
-	private Integer size;
+	private int size;
+	@OneToMany(targetEntity = Event.class, mappedBy = "venue", cascade = CascadeType.ALL)
+	private List<Event> event;
 	
 	public Long getId() {
-		return id;
+		return venueId;
 	}
 	public void setId(Long id) {
-		this.id = id;
+		this.venueId = id;
 	}
 	public String getName() {
 		return name;
@@ -66,5 +72,11 @@ public class Venue {
 	}
 	public void setSize(Integer size) {
 		this.size = size;
-	}		
+	}
+	public List<Event> getEvent() {
+		return event;
+	}
+	public void setEvent(List<Event> event) {
+		this.event = event;
+	}
 }

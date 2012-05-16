@@ -1,12 +1,14 @@
 package com.cse769.EJB.Service;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.cse769.EJB.Entity.Event;
+import com.cse769.EJB.Entity.EventCategory;
 import com.cse769.EJB.Entity.Venue;
 
 
@@ -18,7 +20,7 @@ public class EventService {
 	@PersistenceContext(unitName="examples-769-EJB")
 	EntityManager em;
 	
-	public void createEvent(String name, String category, String description, double cost, Date date, int quantity, Venue venue) {
+	public void createEvent(String name, List<EventCategory> category, String description, double cost, Date date, int quantity, Venue venue) {
 		Event event = new Event();
 		event.setName(name);
 		event.setCategory(category);

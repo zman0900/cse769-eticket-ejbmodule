@@ -4,15 +4,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
-public class User {
-	
+public class User{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Long userId;
+	@NotNull
 	private String username;
+	@NotNull
 	private String password;
+	@NotNull
 	private String email;
 	private String address;
 	private String city;
@@ -21,10 +24,10 @@ public class User {
 	private String phone;
 	
 	public Long getId() {
-		return id;
+		return userId;
 	}
 	public void setId(Long id) {
-		this.id = id;
+		this.userId = id;
 	}
 	public String getUsername() {
 		return username;

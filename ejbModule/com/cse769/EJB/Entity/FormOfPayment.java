@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class FormOfPayment {
 	
-	protected Integer id;
+	protected Integer formOfPaymentid;
 	protected String cardNumber;
 	protected String lastFour;
 	protected String fullName;
