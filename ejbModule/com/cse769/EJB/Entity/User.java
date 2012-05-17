@@ -31,6 +31,12 @@ public class User{
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
 	private Set<Transaction> transactions;
 	
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 	public String getUsername() {
 		return username;
 	}
@@ -79,24 +85,16 @@ public class User{
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-	public Long getUserId() {
-		return userId;
-	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
 	public List<FormOfPayment> getFormOfPayment() {
 		return formOfPayment;
 	}
 	public void setFormOfPayment(List<FormOfPayment> formOfPayment) {
 		this.formOfPayment = formOfPayment;
 	}
-	
 	public Set<Transaction> getTransactions() {
 		return transactions;
 	}
 	public void setTransactions(Set<Transaction> transactions) {
 		this.transactions = transactions;
-	}	
+	}
 }

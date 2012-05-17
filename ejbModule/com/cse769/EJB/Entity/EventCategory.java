@@ -22,18 +22,11 @@ public class EventCategory {
 	@JoinTable(name = "JOIN_EVENT_EVENTCATEGORY", joinColumns = {@JoinColumn(name="eventId")}, inverseJoinColumns = {@JoinColumn(name="categoryId")})
 	private List<Event> events;
 	
-	
-	public Long getId() {
+	public Long getCategoryId() {
 		return categoryId;
 	}
-	public void setId(Long id) {
-		this.categoryId = id;
-	}
-	public String getName() {
-		return category;
-	}
-	public void setName(String name) {
-		this.category = name;
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
 	}
 	public String getCategory() {
 		return category;

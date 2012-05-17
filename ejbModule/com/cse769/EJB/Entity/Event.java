@@ -29,12 +29,17 @@ public class Event {
 	private String description;
 	private double cost;
 	private int quantity;
-	
 	@ManyToMany
 	private Set<EventCategory> category;
 	@OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
 	private Set<Ticket> tickets;
 	
+	public Long getEventId() {
+		return eventId;
+	}
+	public void setEventId(Long eventId) {
+		this.eventId = eventId;
+	}
 	public String getName() {
 		return name;
 	}
@@ -82,11 +87,5 @@ public class Event {
 	}
 	public void setTickets(Set<Ticket> tickets) {
 		this.tickets = tickets;
-	}
-	public Long getEventId() {
-		return eventId;
-	}
-	public void setEventId(Long eventId) {
-		this.eventId = eventId;
 	}
 }
