@@ -24,4 +24,8 @@ public class UserService {
 		user.setPhone(phone);
 		em.persist(user);
 	}
+	
+	public User getUserById(Long id) {
+		return em.find(User.class, id);
+	}
 }

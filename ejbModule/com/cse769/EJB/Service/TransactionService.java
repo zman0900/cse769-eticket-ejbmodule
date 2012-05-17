@@ -19,12 +19,16 @@ public class TransactionService {
 	@PersistenceContext(unitName="examples-769-EJB")
 	EntityManager em;
 	
-	public void createEvent(FormOfPayment formOfPayment, List<Ticket> ticket, User user, Boolean isCompleted) {
+	public void createTransaction(FormOfPayment formOfPayment, List<Ticket> ticket, User user, Boolean isCompleted) {
 		Transaction transaction = new Transaction();
 		transaction.setFormOfPayment(formOfPayment);
 		transaction.setTicket(ticket);
 		transaction.setUser(user);
 		transaction.setIsCompleted(isCompleted);
 		em.persist(transaction);
+	}
+	
+	public Transaction getTransactionById(Long id) {
+		return em.find(Transaction.class, id);
 	}
 }

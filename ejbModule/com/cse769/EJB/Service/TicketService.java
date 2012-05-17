@@ -21,4 +21,8 @@ public class TicketService {
 		ticket.setSoldFlag(soldFlag);
 		em.persist(ticket);
 	}
+	
+	public Ticket getTicketById(Long id) {
+		return em.find(Ticket.class, id);
+	}
 }

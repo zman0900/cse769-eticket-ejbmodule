@@ -24,4 +24,8 @@ public class VenueService {
 		venue.setZipCode(zipCode);
 		em.persist(venue);
 	}
+	
+	public Venue getVenueById(Long id) {
+		return em.find(Venue.class, id);
+	}
 }
