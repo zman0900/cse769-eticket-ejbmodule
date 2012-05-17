@@ -4,9 +4,7 @@
 package com.cse769.EJB.Entity;
 
 import java.util.Date;
-
-import java.util.List;
-
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,16 +31,10 @@ public class Event {
 	private int quantity;
 	
 	@ManyToMany
-	private List<EventCategory> category;
-	@OneToMany(targetEntity = Ticket.class, mappedBy = "event", cascade = CascadeType.ALL)
-	private List<Ticket> tickets;
+	private Set<EventCategory> category;
+	@OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+	private Set<Ticket> tickets;
 	
-	public Long getId() {
-		return eventId;
-	}
-	public void setId(Long id) {
-		this.eventId = id;
-	}
 	public String getName() {
 		return name;
 	}
@@ -79,17 +71,22 @@ public class Event {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public List<EventCategory> getCategory() {
+	public Set<EventCategory> getCategory() {
 		return category;
 	}
-	public void setCategory(List<EventCategory> category) {
+	public void setCategory(Set<EventCategory> category) {
 		this.category = category;
 	}
-	public List<Ticket> getTickets() {
+	public Set<Ticket> getTickets() {
 		return tickets;
 	}
-	public void setTickets(List<Ticket> tickets) {
+	public void setTickets(Set<Ticket> tickets) {
 		this.tickets = tickets;
 	}
-	
+	public Long getEventId() {
+		return eventId;
+	}
+	public void setEventId(Long eventId) {
+		this.eventId = eventId;
+	}
 }

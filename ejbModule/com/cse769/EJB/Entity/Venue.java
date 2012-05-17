@@ -25,12 +25,6 @@ public class Venue {
 	@OneToMany(targetEntity = Event.class, mappedBy = "venue", cascade = CascadeType.ALL)
 	private List<Event> event;
 	
-	public Long getId() {
-		return venueId;
-	}
-	public void setId(Long id) {
-		this.venueId = id;
-	}
 	public String getName() {
 		return name;
 	}
@@ -78,5 +72,14 @@ public class Venue {
 	}
 	public void setEvent(List<Event> event) {
 		this.event = event;
+	}
+	public Long getVenueId() {
+		return venueId;
+	}
+	public void setVenueId(Long venueId) {
+		this.venueId = venueId;
+	}
+	public void setSize(int size) {
+		this.size = size;
 	}
 }
