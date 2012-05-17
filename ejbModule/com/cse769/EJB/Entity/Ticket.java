@@ -18,6 +18,9 @@ public class Ticket {
 	@JoinColumn(name = "event_id", nullable=false)
 	private Event event;
 	private boolean soldFlag;
+	@ManyToOne
+	@JoinColumn(name = "transaction_id", nullable=false)
+	private Transaction transaction;
 	
 	public Long getId() {
 		return id;
@@ -36,5 +39,11 @@ public class Ticket {
 	}
 	public void setSoldFlag(boolean soldFlag) {
 		this.soldFlag = soldFlag;
+	}
+	public Transaction getTransaction() {
+		return transaction;
+	}
+	public void setTransaction(Transaction transaction) {
+		this.transaction = transaction;
 	}			
 }
