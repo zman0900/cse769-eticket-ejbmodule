@@ -31,4 +31,8 @@ public class EventService {
 		event.setVenue(venue);
 		em.persist(event);
 	}
+	
+	public Event getEventById(Long id) {
+		return em.find(Event.class, id);
+	}
 }
