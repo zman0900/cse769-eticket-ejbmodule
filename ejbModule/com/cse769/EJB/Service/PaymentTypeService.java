@@ -1,5 +1,7 @@
 package com.cse769.EJB.Service;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,9 +15,10 @@ public class PaymentTypeService {
 	@PersistenceContext(unitName="examples-769-EJB")
 	EntityManager em;
 	
-	public void createPaymentType() {
+	public void createPaymentType(List<FormOfPayment> formOfPayment, String name) {
 		PaymentType paymentType = new PaymentType();
-		//TODO: 
+		paymentType.setFormOfPayment(formOfPayment);
+		paymentType.setName(name);
 		em.persist(paymentType);
 	}
 	
