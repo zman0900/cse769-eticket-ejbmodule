@@ -1,26 +1,19 @@
 package com.cse769.EJB.Service;
 
-import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.cse769.EJB.Entity.Event;
-import com.cse769.EJB.Entity.EventCategory;
 import com.cse769.EJB.Entity.FormOfPayment;
 
+@Stateless
 public class FormOfPaymentService {
 	
-	@Stateless
-	public class FormOfPaymentService {
-		
-
 		@PersistenceContext(unitName="examples-769-EJB")
 		EntityManager em;
 		
 		public void createFormOfPayment() {
-			FormOfPayment formOfPayment;
+			FormOfPayment formOfPayment = new FormOfPayment();
 			//TODO: 
 			em.persist(formOfPayment);
 		}
@@ -30,5 +23,3 @@ public class FormOfPaymentService {
 		}
 
 	}
-
-}
