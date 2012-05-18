@@ -13,47 +13,56 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Transaction {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long transactionId;
 	@ManyToOne
-	@JoinColumn(name="formOfPaymentid", nullable=false)
+	@JoinColumn(name = "formOfPaymentid", nullable = false)
 	private FormOfPayment formOfPayment;
 	@ManyToOne
-	@JoinColumn(name="USER_ID", nullable=false)
+	@JoinColumn(name = "USER_ID", nullable = false)
 	private User user;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "transaction")
 	private List<Ticket> ticket;
 	private Boolean isCompleted;
-	
+
 	public Long getTransactionId() {
 		return transactionId;
 	}
+
 	public void setTransactionId(Long transactionId) {
 		this.transactionId = transactionId;
 	}
+
 	public FormOfPayment getFormOfPayment() {
 		return formOfPayment;
 	}
+
 	public void setFormOfPayment(FormOfPayment formOfPayment) {
 		this.formOfPayment = formOfPayment;
 	}
+
 	public User getUser() {
 		return user;
 	}
+
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 	public List<Ticket> getTicket() {
 		return ticket;
 	}
+
 	public void setTicket(List<Ticket> ticket) {
 		this.ticket = ticket;
 	}
+
 	public Boolean getIsCompleted() {
 		return isCompleted;
 	}
+
 	public void setIsCompleted(Boolean isCompleted) {
 		this.isCompleted = isCompleted;
 	}

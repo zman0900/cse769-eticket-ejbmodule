@@ -14,29 +14,34 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class EventCategory {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long categoryId;
 	@NotNull
 	private String category;
 	@ManyToMany
-	@JoinTable(name = "JOIN_EVENT_EVENTCATEGORY", joinColumns = {@JoinColumn(name="eventId")}, inverseJoinColumns = {@JoinColumn(name="categoryId")})
+	@JoinTable(name = "JOIN_EVENT_EVENTCATEGORY", joinColumns = { @JoinColumn(name = "eventId") }, inverseJoinColumns = { @JoinColumn(name = "categoryId") })
 	private List<Event> events;
-	
+
 	public Long getCategoryId() {
 		return categoryId;
 	}
+
 	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
 	}
+
 	public String getCategory() {
 		return category;
 	}
+
 	public void setCategory(String category) {
 		this.category = category;
 	}
+
 	public List<Event> getEvents() {
 		return events;
 	}
+
 	public void setEvents(List<Event> events) {
 		this.events = events;
 	}

@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Event {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long eventId;
@@ -33,58 +33,75 @@ public class Event {
 	private Set<EventCategory> category;
 	@OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
 	private Set<Ticket> tickets;
-	
+
 	public Long getEventId() {
 		return eventId;
 	}
+
 	public void setEventId(Long eventId) {
 		this.eventId = eventId;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public Date getDate() {
 		return date;
 	}
+
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
 	public Venue getVenue() {
 		return venue;
 	}
+
 	public void setVenue(Venue venue) {
 		this.venue = venue;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public double getCost() {
 		return cost;
 	}
+
 	public void setCost(double cost) {
 		this.cost = cost;
 	}
+
 	public int getQuantity() {
 		return quantity;
 	}
+
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+
 	public Set<EventCategory> getCategory() {
 		return category;
 	}
+
 	public void setCategory(Set<EventCategory> category) {
 		this.category = category;
 	}
+
 	public Set<Ticket> getTickets() {
 		return tickets;
 	}
+
 	public void setTickets(Set<Ticket> tickets) {
 		this.tickets = tickets;
 	}
