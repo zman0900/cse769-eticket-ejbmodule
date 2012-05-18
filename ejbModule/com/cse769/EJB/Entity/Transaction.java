@@ -1,15 +1,12 @@
 package com.cse769.EJB.Entity;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Transaction {
@@ -23,8 +20,8 @@ public class Transaction {
 	@ManyToOne
 	@JoinColumn(name = "USER_ID", nullable = false)
 	private User user;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "transaction")
-	private List<Ticket> ticket;
+	@OneToOne(optional = false, mappedBy = "transaction")
+	private Ticket ticket;
 	private Boolean isCompleted;
 
 	public Long getTransactionId() {
@@ -51,11 +48,11 @@ public class Transaction {
 		this.user = user;
 	}
 
-	public List<Ticket> getTicket() {
+	public Ticket getTicket() {
 		return ticket;
 	}
 
-	public void setTicket(List<Ticket> ticket) {
+	public void setTicket(Ticket ticket) {
 		this.ticket = ticket;
 	}
 

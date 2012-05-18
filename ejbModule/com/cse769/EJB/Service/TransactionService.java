@@ -1,7 +1,5 @@
 package com.cse769.EJB.Service;
 
-import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,8 +15,8 @@ public class TransactionService {
 	@PersistenceContext(unitName = "examples-769-EJB")
 	EntityManager em;
 
-	public void createTransaction(FormOfPayment formOfPayment,
-			List<Ticket> ticket, User user, Boolean isCompleted) {
+	public void createTransaction(FormOfPayment formOfPayment, Ticket ticket,
+			User user, Boolean isCompleted) {
 		Transaction transaction = new Transaction();
 		transaction.setFormOfPayment(formOfPayment);
 		transaction.setTicket(ticket);

@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Ticket {
@@ -17,8 +18,8 @@ public class Ticket {
 	@JoinColumn(name = "event_id", nullable = false)
 	private Event event;
 	private boolean soldFlag;
-	@ManyToOne
-	@JoinColumn(name = "transaction_id", nullable = false)
+	@OneToOne
+	@JoinColumn(name = "transaction_id", unique = true, nullable = false, updatable = false)
 	private Transaction transaction;
 
 	public Long getTicketId() {
