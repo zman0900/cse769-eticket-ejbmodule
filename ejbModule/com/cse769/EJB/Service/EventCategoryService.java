@@ -33,7 +33,10 @@ public class EventCategoryService {
 	}
 	
 	public void updateEventCategory(EventCategory ec) {
-		EventCategory newEventCategory = new EventCategory();
-		newEventCategory.setName(ec.getName());
+		em.getTransaction().begin();
+		EventCategory newEventCategory = em.find(EventCategory.class, ec.getCategoryId());
+		newEventCategory.setCategory(ec.getCategory());
+		newEventCategory.setEvents(ec.getEvents());
+		em.getTransaction().commit();
 	}
 }

@@ -42,7 +42,8 @@ public class EventService {
 	}
 	
 	public void updateEvent(Event ev) {
-		Event newEvent = new Event();
+		em.getTransaction().begin();
+		Event newEvent = em.find(Event.class, ev.getEventId());
 		newEvent.setCategory(ev.getCategory());
 		newEvent.setCost(ev.getCost());
 		newEvent.setDate(ev.getDate());
@@ -51,5 +52,6 @@ public class EventService {
 		newEvent.setQuantity(ev.getQuantity());
 		newEvent.setTickets(ev.getTickets());
 		newEvent.setVenue(ev.getVenue());
+		em.getTransaction().commit();
 	}
 }

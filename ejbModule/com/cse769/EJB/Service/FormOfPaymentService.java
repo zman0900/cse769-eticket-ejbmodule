@@ -4,7 +4,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.cse769.EJB.Entity.EventCategory;
 import com.cse769.EJB.Entity.FormOfPayment;
 
 @Stateless
@@ -29,7 +28,8 @@ public class FormOfPaymentService {
 		}
 		
 		public void updateFormOfPayment(FormOfPayment fop) {
-			FormOfPayment newFop = new FormOfPayment();
+			em.getTransaction().begin();
+			FormOfPayment newFop = em.find(FormOfPayment.class, fop.getFormOfPaymentid());
 			newFop.setAddress(fop.getAddress());
 			newFop.setCardNumber(fop.getCardNumber());
 			newFop.setCity(fop.getCity());
@@ -39,6 +39,7 @@ public class FormOfPaymentService {
 			newFop.setPhoneNumber(fop.getPhoneNumber());
 			newFop.setState(fop.getPhoneNumber());
 			newFop.setTransactions(fop.getTransactions());
+			em.getTransaction().commit();
 		}
 
 	}
