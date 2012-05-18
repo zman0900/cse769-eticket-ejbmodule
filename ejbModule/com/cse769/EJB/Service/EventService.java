@@ -59,4 +59,9 @@ public class EventService {
 		List<Event> events = em.createQuery("SELECT e from Event e").getResultList();
 		return events;
 	}
+	
+	public List<Event> findEventsByName(String event) {
+		List<Event> events = em.createQuery("SELECT e from Event e where e.name=" + "'" + event + "'").getResultList();
+		return events;
+	}
 }

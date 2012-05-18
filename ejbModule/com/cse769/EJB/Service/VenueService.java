@@ -1,6 +1,5 @@
 package com.cse769.EJB.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -56,6 +55,11 @@ public class VenueService {
 	
 	public List<Venue> getAllVenues() {
 		List<Venue> venues = em.createQuery("SELECT v from Venue v").getResultList();
+		return venues;
+	}
+	
+	public List<Venue> findVenuesByName(String venue) {
+		List<Venue> venues = em.createQuery("SELECT v from Venue v where v.name=" + "'" + venue + "'").getResultList();
 		return venues;
 	}
 }

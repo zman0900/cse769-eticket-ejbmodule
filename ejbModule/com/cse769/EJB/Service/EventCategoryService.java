@@ -45,4 +45,9 @@ public class EventCategoryService {
 		List<EventCategory> category = em.createQuery("SELECT c from EventCategory c").getResultList();
 		return category;
 	}
+	
+	public List<EventCategory> findCategoryByName(String category) {
+		List<EventCategory> categories = em.createQuery("SELECT c from EventCategory c where c.category=" + "'" + category + "'").getResultList();
+		return categories;
+	}
 }

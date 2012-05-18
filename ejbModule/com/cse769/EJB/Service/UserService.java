@@ -64,4 +64,9 @@ public class UserService {
 		List<User> users = em.createQuery("SELECT u from User u").getResultList();
 		return users;
 	}
+	
+	public List<User> findUsersByName(String user) {
+		List<User> users = em.createQuery("SELECT u from User u where u.username=" + "'" + user + "'").getResultList();
+		return users;
+	}
 }
