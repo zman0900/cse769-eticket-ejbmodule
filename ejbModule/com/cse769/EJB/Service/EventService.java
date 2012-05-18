@@ -1,6 +1,7 @@
 package com.cse769.EJB.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -52,5 +53,10 @@ public class EventService {
 		newEvent.setTickets(ev.getTickets());
 		newEvent.setVenue(ev.getVenue());
 		em.getTransaction().commit();
+	}
+	
+	public List<Event> getAllEvents() {
+		List<Event> events = em.createQuery("SELECT e from Event e").getResultList();
+		return events;
 	}
 }

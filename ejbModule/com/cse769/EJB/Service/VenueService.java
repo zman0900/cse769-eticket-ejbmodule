@@ -1,5 +1,6 @@
 package com.cse769.EJB.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -51,5 +52,10 @@ public class VenueService {
 		newVen.setState(ven.getState());
 		newVen.setZipCode(ven.getZipCode());
 		em.getTransaction().commit();
+	}
+	
+	public List<Venue> getAllVenues() {
+		List<Venue> venues = em.createQuery("SELECT v from Venue v").getResultList();
+		return venues;
 	}
 }

@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import com.cse769.EJB.Entity.FormOfPayment;
 import com.cse769.EJB.Entity.Transaction;
 import com.cse769.EJB.Entity.User;
+import com.cse769.EJB.Entity.Venue;
 
 @Stateless
 public class UserService {
@@ -57,5 +58,10 @@ public class UserService {
 		newU.setUsername(u.getUsername());
 		newU.setZipCode(u.getZipCode());
 		em.getTransaction().commit();
+	}
+	
+	public List<User> getAllUsers() {
+		List<User> users = em.createQuery("SELECT u from User u").getResultList();
+		return users;
 	}
 }

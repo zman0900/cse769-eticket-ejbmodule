@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 
 import com.cse769.EJB.Entity.Event;
 import com.cse769.EJB.Entity.EventCategory;
+import com.cse769.EJB.Entity.Venue;
 
 @Stateless
 public class EventCategoryService {
@@ -38,5 +39,10 @@ public class EventCategoryService {
 		newEventCategory.setCategory(ec.getCategory());
 		newEventCategory.setEvents(ec.getEvents());
 		em.getTransaction().commit();
+	}
+	
+	public List<EventCategory> getAllCategories() {
+		List<EventCategory> category = em.createQuery("SELECT c from EventCategory c").getResultList();
+		return category;
 	}
 }
