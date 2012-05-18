@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.cse769.EJB.Entity.Event;
+import com.cse769.EJB.Entity.EventCategory;
 import com.cse769.EJB.Entity.Venue;
 
 
@@ -31,5 +32,24 @@ public class VenueService {
 	
 	public Venue getVenueById(Long id) {
 		return em.find(Venue.class, id);
+	}
+	
+	public void removeVenue(Long id) {
+		Venue ven = em.find(Venue.class, id);
+		em.remove(ven);
+	}
+	
+	public void updateVenue(Venue ven) {
+		em.getTransaction().begin();
+		Venue newVen = em.find(Venue.class, ven.getVenueId());
+		newVen.setAddress(ven.getAddress());
+		newVen.setCity(ven.getCity());
+		newVen.setDescription(ven.getDescription());
+		newVen.setEvent(ven.getEvent());
+		newVen.setName(ven.getName());
+		newVen.setSize(ven.getSize());
+		newVen.setState(ven.getState());
+		newVen.setZipCode(ven.getZipCode());
+		em.getTransaction().commit();
 	}
 }
