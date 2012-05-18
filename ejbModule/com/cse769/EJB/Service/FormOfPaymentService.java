@@ -38,5 +38,25 @@ public class FormOfPaymentService {
 		public FormOfPayment getFormOfPaymentById(Long id) {
 			return em.find(FormOfPayment.class, id);
 		}
+		
+		public void removeFormOfPayment(Long id) {
+			FormOfPayment fop = em.find(FormOfPayment.class, id);
+			em.remove(fop);
+		}
+		
+		public void updateFormOfPayment(FormOfPayment fop) {
+			em.getTransaction().begin();
+			FormOfPayment newFop = em.find(FormOfPayment.class, fop.getFormOfPaymentid());
+			newFop.setAddress(fop.getAddress());
+			newFop.setCardNumber(fop.getCardNumber());
+			newFop.setCity(fop.getCity());
+			newFop.setExpiration(fop.getExpiration());
+			newFop.setFullName(fop.getFullName());
+			newFop.setLastFour(fop.getLastFour());
+			newFop.setPhoneNumber(fop.getPhoneNumber());
+			newFop.setState(fop.getPhoneNumber());
+			newFop.setTransactions(fop.getTransactions());
+			em.getTransaction().commit();
+		}
 
 	}

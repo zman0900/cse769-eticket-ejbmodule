@@ -26,5 +26,17 @@ public class EventCategoryService {
 	public EventCategory getEventCategoryById(Long id) {
 		return em.find(EventCategory.class, id);
 	}
-
+	
+	public void removeEventCategory(Long id) {
+		EventCategory ec = em.find(EventCategory.class, id);
+		em.remove(ec);
+	}
+	
+	public void updateEventCategory(EventCategory ec) {
+		em.getTransaction().begin();
+		EventCategory newEventCategory = em.find(EventCategory.class, ec.getCategoryId());
+		newEventCategory.setCategory(ec.getCategory());
+		newEventCategory.setEvents(ec.getEvents());
+		em.getTransaction().commit();
+	}
 }

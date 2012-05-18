@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.cse769.EJB.Entity.EventCategory;
 import com.cse769.EJB.Entity.FormOfPayment;
 import com.cse769.EJB.Entity.Transaction;
 import com.cse769.EJB.Entity.User;
@@ -34,5 +35,26 @@ public class UserService {
 	
 	public User getUserById(Long id) {
 		return em.find(User.class, id);
+	}
+	
+	public void removeUser(Long id) {
+		User u = em.find(User.class, id);
+		em.remove(u);
+	}
+	
+	public void updateUser(User u) {
+		em.getTransaction().begin();
+		User newU = em.find(User.class, u.getUserId());
+		newU.setAddress(u.getAddress());
+		newU.setCity(u.getCity());
+		newU.setEmail(u.getEmail());
+		newU.setFormOfPayment(u.getFormOfPayment());
+		newU.setPassword(u.getPassword());
+		newU.setPhone(u.getPhone());
+		newU.setState(u.getState());
+		newU.setTransactions(u.getTransactions());
+		newU.setUsername(u.getUsername());
+		newU.setZipCode(u.getZipCode());
+		em.getTransaction().commit();
 	}
 }

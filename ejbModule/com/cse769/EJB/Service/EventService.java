@@ -35,4 +35,23 @@ public class EventService {
 	public Event getEventById(Long id) {
 		return em.find(Event.class, id);
 	}
+	
+	public void removeEvent(Long id) {
+		Event ev = em.find(Event.class, id);
+		em.remove(ev);
+	}
+	
+	public void updateEvent(Event ev) {
+		em.getTransaction().begin();
+		Event newEvent = em.find(Event.class, ev.getEventId());
+		newEvent.setCategory(ev.getCategory());
+		newEvent.setCost(ev.getCost());
+		newEvent.setDate(ev.getDate());
+		newEvent.setDescription(ev.getDescription());
+		newEvent.setName(ev.getName());
+		newEvent.setQuantity(ev.getQuantity());
+		newEvent.setTickets(ev.getTickets());
+		newEvent.setVenue(ev.getVenue());
+		em.getTransaction().commit();
+	}
 }
