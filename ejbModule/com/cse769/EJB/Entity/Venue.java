@@ -25,6 +25,12 @@ public class Venue {
 	@OneToMany(targetEntity = Event.class, mappedBy = "venue", cascade = CascadeType.ALL)
 	private List<Event> event;
 	
+	public Long getVenueId() {
+		return venueId;
+	}
+	public void setVenueId(Long venueId) {
+		this.venueId = venueId;
+	}
 	public String getName() {
 		return name;
 	}
@@ -61,10 +67,10 @@ public class Venue {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
-	public Integer getSize() {
+	public int getSize() {
 		return size;
 	}
-	public void setSize(Integer size) {
+	public void setSize(int size) {
 		this.size = size;
 	}
 	public List<Event> getEvent() {
@@ -72,14 +78,5 @@ public class Venue {
 	}
 	public void setEvent(List<Event> event) {
 		this.event = event;
-	}
-	public Long getVenueId() {
-		return venueId;
-	}
-	public void setVenueId(Long venueId) {
-		this.venueId = venueId;
-	}
-	public void setSize(int size) {
-		this.size = size;
 	}
 }

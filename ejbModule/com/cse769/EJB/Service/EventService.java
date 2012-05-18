@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import com.cse769.EJB.Entity.Event;
 import com.cse769.EJB.Entity.EventCategory;
+import com.cse769.EJB.Entity.Ticket;
 import com.cse769.EJB.Entity.Venue;
 
 
@@ -18,7 +19,7 @@ public class EventService {
 	@PersistenceContext(unitName="examples-769-EJB")
 	EntityManager em;
 	
-	public void createEvent(String name, Set<EventCategory> category, String description, double cost, Date date, int quantity, Venue venue) {
+	public void createEvent(String name, Set<EventCategory> category, String description, double cost, Date date, int quantity, Venue venue, Set<Ticket> tickets) {
 		Event event = new Event();
 		event.setName(name);
 		event.setCategory(category);
@@ -27,6 +28,7 @@ public class EventService {
 		event.setDate(date);
 		event.setQuantity(quantity);
 		event.setVenue(venue);
+		event.setTickets(tickets);
 		em.persist(event);
 	}
 	

@@ -16,7 +16,7 @@ public class Transaction {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Long transactionId;
 	@ManyToOne
 	@JoinColumn(name="formOfPaymentid", nullable=false)
 	private FormOfPayment formOfPayment;
@@ -27,11 +27,11 @@ public class Transaction {
 	private List<Ticket> ticket;
 	private Boolean isCompleted;
 	
-	public Long getId() {
-		return id;
+	public Long getTransactionId() {
+		return transactionId;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public void setTransactionId(Long transactionId) {
+		this.transactionId = transactionId;
 	}
 	public FormOfPayment getFormOfPayment() {
 		return formOfPayment;

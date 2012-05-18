@@ -19,7 +19,7 @@ public class EventCategoryService {
 	public void createEventCategory(String name, List<Event> events) {
 		EventCategory eventCategory = new EventCategory();
 		eventCategory.setEvents(events);
-		eventCategory.setName(name);
+		eventCategory.setCategory(name);
 		em.persist(eventCategory);
 	}
 	

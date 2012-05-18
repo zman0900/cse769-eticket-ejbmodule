@@ -20,18 +20,17 @@ public class PaymentType {
 	private String name;
 	@OneToMany(mappedBy = "type", cascade = CascadeType.ALL)
 	private List<FormOfPayment> formOfPayment;
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	public Long getPaymentId() {
 		return paymentId;
 	}
 	public void setPaymentId(Long paymentId) {
 		this.paymentId = paymentId;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public List<FormOfPayment> getFormOfPayment() {
 		return formOfPayment;
