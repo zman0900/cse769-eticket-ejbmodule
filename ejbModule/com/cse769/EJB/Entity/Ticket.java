@@ -19,7 +19,7 @@ public class Ticket {
 	private Event event;
 	private boolean soldFlag;
 	@OneToOne
-	@JoinColumn(name = "transaction_id", unique = true, nullable = false, updatable = false)
+	@JoinColumn(name = "transaction_id", unique = true)
 	private Transaction transaction;
 
 	public Long getTicketId() {

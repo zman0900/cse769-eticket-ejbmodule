@@ -6,20 +6,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "CATEGORY" }))
 public class EventCategory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long categoryId;
 	@NotNull
 	private String category;
-	@ManyToMany
-	@JoinTable(name = "JOIN_EVENT_EVENTCATEGORY", joinColumns = { @JoinColumn(name = "eventId") }, inverseJoinColumns = { @JoinColumn(name = "categoryId") })
+	@ManyToMany(targetEntity = Event.class, mappedBy = "categories")
 	private List<Event> events;
 
 	public Long getCategoryId() {

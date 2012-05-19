@@ -4,6 +4,7 @@
 package com.cse769.EJB.Entity;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -27,10 +28,10 @@ public class Event {
 	@JoinColumn(name = "venue_id")
 	private Venue venue;
 	private String description;
-	private double cost;
+	private int cost;
 	private int quantity;
-	@ManyToMany
-	private Set<EventCategory> category;
+	@ManyToMany(targetEntity = EventCategory.class)
+	private List<EventCategory> categories;
 	@OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
 	private Set<Ticket> tickets;
 
@@ -74,11 +75,11 @@ public class Event {
 		this.description = description;
 	}
 
-	public double getCost() {
+	public int getCost() {
 		return cost;
 	}
 
-	public void setCost(double cost) {
+	public void setCost(int cost) {
 		this.cost = cost;
 	}
 
@@ -90,12 +91,12 @@ public class Event {
 		this.quantity = quantity;
 	}
 
-	public Set<EventCategory> getCategory() {
-		return category;
+	public List<EventCategory> getCategories() {
+		return categories;
 	}
 
-	public void setCategory(Set<EventCategory> category) {
-		this.category = category;
+	public void setCategories(List<EventCategory> categories) {
+		this.categories = categories;
 	}
 
 	public Set<Ticket> getTickets() {
@@ -105,4 +106,5 @@ public class Event {
 	public void setTickets(Set<Ticket> tickets) {
 		this.tickets = tickets;
 	}
+
 }
