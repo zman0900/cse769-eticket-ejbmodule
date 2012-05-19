@@ -17,7 +17,7 @@ public class EventService {
 	@PersistenceContext(unitName = "examples-769-EJB")
 	EntityManager em;
 
-	public void createEvent(String name, List<EventCategory> category,
+	public void createEvent(String name, EventCategory category,
 			String description, double cost, Date date, int quantity,
 			Venue venue) {
 		Event event = new Event();
