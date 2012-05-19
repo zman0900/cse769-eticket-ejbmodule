@@ -2,13 +2,13 @@ package com.cse769.EJB.Service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import com.cse769.EJB.Entity.Event;
 import com.cse769.EJB.Entity.EventCategory;
-import com.cse769.EJB.Entity.Ticket;
 import com.cse769.EJB.Entity.Venue;
 
 @Stateless
@@ -17,9 +17,9 @@ public class EventService {
 	@PersistenceContext(unitName = "examples-769-EJB")
 	EntityManager em;
 
-	public void createEvent(String name, Set<EventCategory> category,
+	public void createEvent(String name, List<EventCategory> category,
 			String description, double cost, Date date, int quantity,
-			Venue venue, Set<Ticket> tickets) {
+			Venue venue) {
 		Event event = new Event();
 		event.setName(name);
 		event.setCategory(category);
@@ -28,7 +28,6 @@ public class EventService {
 		event.setDate(date);
 		event.setQuantity(quantity);
 		event.setVenue(venue);
-		event.setTickets(tickets);
 		em.persist(event);
 	}
 
@@ -50,7 +49,6 @@ public class EventService {
 		newEvent.setDescription(ev.getDescription());
 		newEvent.setName(ev.getName());
 		newEvent.setQuantity(ev.getQuantity());
-		newEvent.setTickets(ev.getTickets());
 		newEvent.setVenue(ev.getVenue());
 		em.getTransaction().commit();
 	}

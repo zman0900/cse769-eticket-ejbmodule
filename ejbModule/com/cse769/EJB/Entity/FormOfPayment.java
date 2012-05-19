@@ -1,16 +1,15 @@
 package com.cse769.EJB.Entity;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class FormOfPayment {
@@ -34,7 +33,7 @@ public class FormOfPayment {
 	private String state;
 	private String zipCode;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "formOfPayment")
-	private Set<Transaction> transactions;
+	private List<Transaction> transactions;
 
 	public Long getFormOfPaymentid() {
 		return formOfPaymentid;
@@ -132,11 +131,11 @@ public class FormOfPayment {
 		this.zipCode = zipCode;
 	}
 
-	public Set<Transaction> getTransactions() {
+	public List<Transaction> getTransactions() {
 		return transactions;
 	}
 
-	public void setTransactions(Set<Transaction> transactions) {
+	public void setTransactions(List<Transaction> transactions) {
 		this.transactions = transactions;
 	}
 }

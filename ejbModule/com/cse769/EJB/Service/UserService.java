@@ -1,16 +1,12 @@
 package com.cse769.EJB.Service;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.cse769.EJB.Entity.FormOfPayment;
-import com.cse769.EJB.Entity.Transaction;
 import com.cse769.EJB.Entity.User;
-import com.cse769.EJB.Entity.Venue;
 
 @Stateless
 public class UserService {
