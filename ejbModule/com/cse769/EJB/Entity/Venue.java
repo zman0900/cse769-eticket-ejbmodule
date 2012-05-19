@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(uniqueConstraints=@UniqueConstraint(columnNames={"NAME"}))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "NAME" }))
 public class Venue {
 
 	@Id

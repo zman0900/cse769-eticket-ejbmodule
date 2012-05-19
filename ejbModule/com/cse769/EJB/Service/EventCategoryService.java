@@ -5,10 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import com.cse769.EJB.Entity.Event;
 import com.cse769.EJB.Entity.EventCategory;
-import com.cse769.EJB.Entity.Venue;
 
 @Stateless
 public class EventCategoryService {
@@ -16,9 +13,8 @@ public class EventCategoryService {
 	@PersistenceContext(unitName = "examples-769-EJB")
 	EntityManager em;
 
-	public void createEventCategory(String name, List<Event> events) {
+	public void createEventCategory(String name) {
 		EventCategory eventCategory = new EventCategory();
-		eventCategory.setEvents(events);
 		eventCategory.setCategory(name);
 		em.persist(eventCategory);
 	}
@@ -37,17 +33,20 @@ public class EventCategoryService {
 		EventCategory newEventCategory = em.find(EventCategory.class,
 				ec.getCategoryId());
 		newEventCategory.setCategory(ec.getCategory());
-		newEventCategory.setEvents(ec.getEvents());
 		em.getTransaction().commit();
 	}
-	
+
 	public List<EventCategory> getAllCategories() {
-		List<EventCategory> category = em.createQuery("SELECT c from EventCategory c").getResultList();
+		List<EventCategory> category = em.createQuery(
+				"SELECT c from EventCategory c", EventCategory.class)
+				.getResultList();
 		return category;
 	}
-	
+
 	public List<EventCategory> findCategoryByName(String category) {
-		List<EventCategory> categories = em.createQuery("SELECT c from EventCategory c where c.category=" + "'" + category + "'").getResultList();
+		List<EventCategory> categories = em.createQuery(
+				"SELECT c from EventCategory c where c.category=" + "'"
+						+ category + "'", EventCategory.class).getResultList();
 		return categories;
 	}
 }

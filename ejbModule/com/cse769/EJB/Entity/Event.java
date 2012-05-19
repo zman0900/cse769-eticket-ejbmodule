@@ -5,14 +5,12 @@ package com.cse769.EJB.Entity;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -30,10 +28,11 @@ public class Event {
 	private String description;
 	private int cost;
 	private int quantity;
-	@ManyToMany(targetEntity = EventCategory.class)
-	private List<EventCategory> categories;
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private EventCategory category;
 	@OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
-	private Set<Ticket> tickets;
+	private List<Ticket> tickets;
 
 	public Long getEventId() {
 		return eventId;
@@ -91,19 +90,19 @@ public class Event {
 		this.quantity = quantity;
 	}
 
-	public List<EventCategory> getCategories() {
-		return categories;
+	public EventCategory getCategory() {
+		return category;
 	}
 
-	public void setCategories(List<EventCategory> categories) {
-		this.categories = categories;
+	public void setCategory(EventCategory category) {
+		this.category = category;
 	}
 
-	public Set<Ticket> getTickets() {
+	public List<Ticket> getTickets() {
 		return tickets;
 	}
 
-	public void setTickets(Set<Ticket> tickets) {
+	public void setTickets(List<Ticket> tickets) {
 		this.tickets = tickets;
 	}
 

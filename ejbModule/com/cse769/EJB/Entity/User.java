@@ -1,7 +1,6 @@
 package com.cse769.EJB.Entity;
 
 import java.util.List;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +28,7 @@ public class User {
 	@OneToMany(targetEntity = FormOfPayment.class, mappedBy = "user", cascade = CascadeType.ALL)
 	private List<FormOfPayment> formOfPayment;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	private Set<Transaction> transactions;
+	private List<Transaction> transactions;
 
 	public Long getUserId() {
 		return userId;
@@ -111,11 +110,11 @@ public class User {
 		this.formOfPayment = formOfPayment;
 	}
 
-	public Set<Transaction> getTransactions() {
+	public List<Transaction> getTransactions() {
 		return transactions;
 	}
 
-	public void setTransactions(Set<Transaction> transactions) {
+	public void setTransactions(List<Transaction> transactions) {
 		this.transactions = transactions;
 	}
 }

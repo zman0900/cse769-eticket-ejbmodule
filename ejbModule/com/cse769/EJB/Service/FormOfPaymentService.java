@@ -1,7 +1,7 @@
 package com.cse769.EJB.Service;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -20,7 +20,7 @@ public class FormOfPaymentService {
 
 	public void createFormOfPayment(String address, String cardNumber,
 			String city, Date expiration, String fullName, String lastFour,
-			String phoneNumber, String state, Set<Transaction> transactions,
+			String phoneNumber, String state, List<Transaction> transactions,
 			PaymentType type, User user, String zipCode) {
 		FormOfPayment formOfPayment = new FormOfPayment();
 		formOfPayment.setAddress(address);

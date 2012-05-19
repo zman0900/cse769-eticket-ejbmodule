@@ -2,13 +2,14 @@ package com.cse769.EJB.Entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -19,7 +20,7 @@ public class EventCategory {
 	private Long categoryId;
 	@NotNull
 	private String category;
-	@ManyToMany(targetEntity = Event.class, mappedBy = "categories")
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
 	private List<Event> events;
 
 	public Long getCategoryId() {
