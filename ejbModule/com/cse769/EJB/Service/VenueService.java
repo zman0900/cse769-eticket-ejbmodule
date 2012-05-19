@@ -16,8 +16,7 @@ public class VenueService {
 	EntityManager em;
 
 	public void createVenue(String name, int size, String description,
-			String address, String city, String state, String zipCode,
-			List<Event> event) {
+			String address, String city, String state, String zipCode) {
 		Venue venue = new Venue();
 		venue.setName(name);
 		venue.setSize(size);
@@ -26,7 +25,6 @@ public class VenueService {
 		venue.setCity(city);
 		venue.setState(state);
 		venue.setZipCode(zipCode);
-		venue.setEvent(event);
 		em.persist(venue);
 	}
 
@@ -45,7 +43,6 @@ public class VenueService {
 		newVen.setAddress(ven.getAddress());
 		newVen.setCity(ven.getCity());
 		newVen.setDescription(ven.getDescription());
-		newVen.setEvent(ven.getEvent());
 		newVen.setName(ven.getName());
 		newVen.setSize(ven.getSize());
 		newVen.setState(ven.getState());
