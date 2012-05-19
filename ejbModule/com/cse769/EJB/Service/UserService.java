@@ -19,8 +19,7 @@ public class UserService {
 
 	public void createUser(String username, String password, String email,
 			String address, String city, String state, String zipCode,
-			String phone, List<FormOfPayment> formOfPayment,
-			Set<Transaction> transactions) {
+			String phone) {
 		User user = new User();
 		user.setUsername(username);
 		user.setPassword(password);
@@ -29,9 +28,7 @@ public class UserService {
 		user.setCity(city);
 		user.setState(state);
 		user.setZipCode(zipCode);
-		user.setPhone(phone);
-		user.setFormOfPayment(formOfPayment);
-		user.setTransactions(transactions);
+		user.setPhone(phone);		
 		em.persist(user);
 	}
 
@@ -49,12 +46,10 @@ public class UserService {
 		User newU = em.find(User.class, u.getUserId());
 		newU.setAddress(u.getAddress());
 		newU.setCity(u.getCity());
-		newU.setEmail(u.getEmail());
-		newU.setFormOfPayment(u.getFormOfPayment());
+		newU.setEmail(u.getEmail());		
 		newU.setPassword(u.getPassword());
 		newU.setPhone(u.getPhone());
 		newU.setState(u.getState());
-		newU.setTransactions(u.getTransactions());
 		newU.setUsername(u.getUsername());
 		newU.setZipCode(u.getZipCode());
 		em.getTransaction().commit();
