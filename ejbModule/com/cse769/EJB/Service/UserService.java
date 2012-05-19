@@ -52,12 +52,12 @@ public class UserService {
 	}
 	
 	public List<User> getAllUsers() {
-		List<User> users = em.createQuery("SELECT u from User u").getResultList();
+		List<User> users = em.createQuery("SELECT u from User u", User.class).getResultList();
 		return users;
 	}
 	
 	public List<User> findUsersByName(String user) {
-		List<User> users = em.createQuery("SELECT u from User u where u.username=" + "'" + user + "'").getResultList();
+		List<User> users = em.createQuery("SELECT u from User u where u.username=" + "'" + user + "'", User.class).getResultList();
 		return users;
 	}
 }
