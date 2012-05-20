@@ -8,6 +8,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import com.cse769.EJB.Entity.Event;
 import com.cse769.EJB.Entity.EventCategory;
@@ -71,10 +72,12 @@ public class EventService {
 		return events;
 	}
 
-	public List<Event> findEventsByName(String event) {
-		List<Event> events = em.createQuery(
-				"SELECT e from Event e where e.name=" + "'" + event + "'",
-				Event.class).getResultList();
+	public List<Event> findEventsByName(String event) {		
+		final String query = "SELECT e FROM Event e WHERE e.name = :name";
+		final String name = event;
+		TypedQuery<Event> query1 = em.createQuery(query, Event.class);
+		query1.setParameter("name", name);
+		final List<Event> events = query1.getResultList();
 		return events;
 	}
 
@@ -107,5 +110,22 @@ public class EventService {
 			// ignore
 		}
 	}
-
+	
+	public List<Event> findEventsByCategory(String category) {		
+		final String query = "SELECT e FROM Event e WHERE e.category.category = :categoryName";
+		final String categoryName = category;
+		TypedQuery<Event> query1 = em.createQuery(query, Event.class);
+		query1.setParameter("categoryName", categoryName);
+		final List<Event> events = query1.getResultList();
+		return events;
+	}
+	
+	public List<Event> findEventsByVenue(String venue) {		
+		final String query = "SELECT e FROM Event e WHERE e.venue.name = :venueName";
+		final String venueName = venue;
+		TypedQuery<Event> query1 = em.createQuery(query, Event.class);
+		query1.setParameter("categoryName", venueName);
+		final List<Event> events = query1.getResultList();
+		return events;
+	}
 }
