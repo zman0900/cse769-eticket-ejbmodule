@@ -81,7 +81,7 @@ public class EventService {
 		return events;
 	}
 
-	public void createDemoEvents() {
+	public boolean createDemoEvents() {
 		EventCategory sports = new EventCategory();
 		sports.setCategory("Sports");
 		EventCategory music = new EventCategory();
@@ -107,8 +107,9 @@ public class EventService {
 					"A game to end all games", 5324, cal.getTime(), 100,
 					stadium);
 		} catch (Exception e) {
-			// ignore
+			return false;
 		}
+		return true;
 	}
 	
 	public List<Event> findEventsByCategory(String category) {		
@@ -116,6 +117,15 @@ public class EventService {
 		final String categoryName = category;
 		TypedQuery<Event> query1 = em.createQuery(query, Event.class);
 		query1.setParameter("categoryName", categoryName);
+		final List<Event> events = query1.getResultList();
+		return events;
+	}
+	
+	public List<Event> findEventsByCategoryId(Long id) {		
+		final String query = "SELECT e FROM Event e WHERE e.category.categoryId = :categoryId";
+		final Long categoryId = id;
+		TypedQuery<Event> query1 = em.createQuery(query, Event.class);
+		query1.setParameter("categoryId", categoryId);
 		final List<Event> events = query1.getResultList();
 		return events;
 	}
