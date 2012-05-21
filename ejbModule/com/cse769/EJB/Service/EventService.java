@@ -80,6 +80,15 @@ public class EventService {
 		final List<Event> events = query1.getResultList();
 		return events;
 	}
+	
+	public List<Event> searchEventsByName(String search) {		
+		final String query = "SELECT e FROM Event e WHERE upper(e.name) LIKE upper(:name)";
+		final String name = "%" + search + "%";
+		TypedQuery<Event> query1 = em.createQuery(query, Event.class);
+		query1.setParameter("name", name);
+		final List<Event> events = query1.getResultList();
+		return events;
+	}
 
 	public boolean createDemoEvents() {
 		EventCategory sports = new EventCategory();
