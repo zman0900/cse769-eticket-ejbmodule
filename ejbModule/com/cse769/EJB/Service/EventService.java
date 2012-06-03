@@ -143,8 +143,16 @@ public class EventService {
 		final String query = "SELECT e FROM Event e WHERE e.venue.name = :venueName";
 		final String venueName = venue;
 		TypedQuery<Event> query1 = em.createQuery(query, Event.class);
-		query1.setParameter("categoryName", venueName);
+		query1.setParameter("venueName", venueName);
 		final List<Event> events = query1.getResultList();
 		return events;
+	}
+	
+	public int getNumOfAvailableTickets(Long id) {
+		final String query = "SELECT COUNT(t) FROM Ticket t WHERE t.event.eventId = :eventId AND t.soldFlag = false";
+		final String eventId = id.toString();
+		TypedQuery<Integer> query1 = em.createQuery(query, Integer.class);
+		query1.setParameter("eventId", eventId);
+		return query1.getSingleResult();
 	}
 }
