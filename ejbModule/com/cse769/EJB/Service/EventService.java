@@ -148,10 +148,10 @@ public class EventService {
 		return events;
 	}
 	
-	public int getNumOfAvailableTickets(Long id) {
+	public Long getNumOfAvailableTickets(Long id) {
 		final String query = "SELECT COUNT(t) FROM Ticket t WHERE t.event.eventId = :eventId AND t.soldFlag = false";
 		final String eventId = id.toString();
-		TypedQuery<Integer> query1 = em.createQuery(query, Integer.class);
+		TypedQuery<Long> query1 = em.createQuery(query, Long.class);
 		query1.setParameter("eventId", eventId);
 		return query1.getSingleResult();
 	}
