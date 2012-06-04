@@ -24,7 +24,7 @@ public class UserService {
 		user.setCity(city);
 		user.setState(state);
 		user.setZipCode(zipCode);
-		user.setPhone(phone);		
+		user.setPhone(phone);
 		em.persist(user);
 	}
 
@@ -42,7 +42,7 @@ public class UserService {
 		User newU = em.find(User.class, u.getUserId());
 		newU.setAddress(u.getAddress());
 		newU.setCity(u.getCity());
-		newU.setEmail(u.getEmail());		
+		newU.setEmail(u.getEmail());
 		newU.setPassword(u.getPassword());
 		newU.setPhone(u.getPhone());
 		newU.setState(u.getState());
@@ -50,14 +50,16 @@ public class UserService {
 		newU.setZipCode(u.getZipCode());
 		em.getTransaction().commit();
 	}
-	
+
 	public List<User> getAllUsers() {
-		List<User> users = em.createQuery("SELECT u from User u", User.class).getResultList();
+		List<User> users = em.createQuery("SELECT u from User u", User.class)
+				.getResultList();
 		return users;
 	}
-	
-	public List<User> findUsersByName(String user) {
-		List<User> users = em.createQuery("SELECT u from User u where u.username=" + "'" + user + "'", User.class).getResultList();
-		return users;
+
+	public User findUserByName(String user) {
+		return em.createQuery(
+				"SELECT u from User u where u.username=" + "'" + user + "'",
+				User.class).getSingleResult();
 	}
 }
