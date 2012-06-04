@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import com.cse769.EJB.Entity.User;
@@ -58,8 +59,15 @@ public class UserService {
 	}
 
 	public User findUserByName(String user) {
-		return em.createQuery(
-				"SELECT u from User u where u.username=" + "'" + user + "'",
-				User.class).getSingleResult();
+		User result = null;
+		try {
+			result = em
+					.createQuery(
+							"SELECT u from User u where u.username=" + "'"
+									+ user + "'", User.class).getSingleResult();
+		} catch (NoResultException e) {
+			// Ignore, return null
+		}
+		return result;
 	}
 }
