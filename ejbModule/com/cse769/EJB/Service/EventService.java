@@ -73,7 +73,7 @@ public class EventService {
 	}
 
 	// Not used?
-	public List<Event> findEventsByName(String event) {		
+	public List<Event> findEventsByName(String event) {
 		final String query = "SELECT e FROM Event e WHERE e.name = :name";
 		final String name = event;
 		TypedQuery<Event> query1 = em.createQuery(query, Event.class);
@@ -81,8 +81,8 @@ public class EventService {
 		final List<Event> events = query1.getResultList();
 		return events;
 	}
-	
-	public List<Event> searchEventsByName(String search) {		
+
+	public List<Event> searchEventsByName(String search) {
 		final String query = "SELECT e FROM Event e WHERE upper(e.name) LIKE upper(:name)";
 		final String name = "%" + search + "%";
 		TypedQuery<Event> query1 = em.createQuery(query, Event.class);
@@ -104,11 +104,20 @@ public class EventService {
 		stadium.setSize(102329);
 		stadium.setState("OH");
 		stadium.setZipCode("43210");
+		Venue schott = new Venue();
+		schott.setAddress("555 Borror Drive");
+		schott.setCity("Columbus");
+		schott.setDescription("The Jerome Schottenstein Center");
+		schott.setName("Value City Arena");
+		schott.setSize(18809);
+		schott.setState("OH");
+		schott.setZipCode("43210");
 
 		try {
 			em.persist(sports);
 			em.persist(music);
 			em.persist(stadium);
+			em.persist(schott);
 			em.flush();
 
 			Calendar cal = Calendar.getInstance();
@@ -116,14 +125,19 @@ public class EventService {
 			createEvent("Ohio State vs Michigan Football", sports,
 					"A game to end all games", 5324, cal.getTime(), 100,
 					stadium);
+			cal.set(2070, 8, 18);
+			createEvent("Jimi Hendrix Zombie", music,
+					"Jimi Hendrix is back to play a concert,"
+							+ "but he's hungry for brains...", 66666,
+					cal.getTime(), 321, schott);
 		} catch (Exception e) {
 			return false;
 		}
 		return true;
 	}
-	
+
 	// Not used?
-	public List<Event> findEventsByCategory(String category) {		
+	public List<Event> findEventsByCategory(String category) {
 		final String query = "SELECT e FROM Event e WHERE e.category.category = :categoryName";
 		final String categoryName = category;
 		TypedQuery<Event> query1 = em.createQuery(query, Event.class);
@@ -131,8 +145,8 @@ public class EventService {
 		final List<Event> events = query1.getResultList();
 		return events;
 	}
-	
-	public List<Event> findEventsByCategoryId(Long id) {		
+
+	public List<Event> findEventsByCategoryId(Long id) {
 		final String query = "SELECT e FROM Event e WHERE e.category.categoryId = :categoryId";
 		final Long categoryId = id;
 		TypedQuery<Event> query1 = em.createQuery(query, Event.class);
@@ -140,9 +154,9 @@ public class EventService {
 		final List<Event> events = query1.getResultList();
 		return events;
 	}
-	
+
 	// Not used?
-	public List<Event> findEventsByVenue(String venue) {		
+	public List<Event> findEventsByVenue(String venue) {
 		final String query = "SELECT e FROM Event e WHERE e.venue.name = :venueName";
 		final String venueName = venue;
 		TypedQuery<Event> query1 = em.createQuery(query, Event.class);
@@ -150,8 +164,8 @@ public class EventService {
 		final List<Event> events = query1.getResultList();
 		return events;
 	}
-	
-	public List<Event> findEventsByVenueId(Long id) {		
+
+	public List<Event> findEventsByVenueId(Long id) {
 		final String query = "SELECT e FROM Event e WHERE e.venue.venueId = :venueId";
 		final Long venueId = id;
 		TypedQuery<Event> query1 = em.createQuery(query, Event.class);
@@ -159,7 +173,7 @@ public class EventService {
 		final List<Event> events = query1.getResultList();
 		return events;
 	}
-	
+
 	public Long getNumOfAvailableTickets(Long id) {
 		final String query = "SELECT COUNT(t) FROM Ticket t WHERE t.event.eventId = :eventId AND t.soldFlag = false";
 		final Long eventId = id;
