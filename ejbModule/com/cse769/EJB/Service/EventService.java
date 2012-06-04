@@ -72,6 +72,7 @@ public class EventService {
 		return events;
 	}
 
+	// Not used?
 	public List<Event> findEventsByName(String event) {		
 		final String query = "SELECT e FROM Event e WHERE e.name = :name";
 		final String name = event;
@@ -121,6 +122,7 @@ public class EventService {
 		return true;
 	}
 	
+	// Not used?
 	public List<Event> findEventsByCategory(String category) {		
 		final String query = "SELECT e FROM Event e WHERE e.category.category = :categoryName";
 		final String categoryName = category;
@@ -139,11 +141,21 @@ public class EventService {
 		return events;
 	}
 	
+	// Not used?
 	public List<Event> findEventsByVenue(String venue) {		
 		final String query = "SELECT e FROM Event e WHERE e.venue.name = :venueName";
 		final String venueName = venue;
 		TypedQuery<Event> query1 = em.createQuery(query, Event.class);
 		query1.setParameter("venueName", venueName);
+		final List<Event> events = query1.getResultList();
+		return events;
+	}
+	
+	public List<Event> findEventsByVenueId(Long id) {		
+		final String query = "SELECT e FROM Event e WHERE e.venue.venueId = :venueId";
+		final Long venueId = id;
+		TypedQuery<Event> query1 = em.createQuery(query, Event.class);
+		query1.setParameter("venueId", venueId);
 		final List<Event> events = query1.getResultList();
 		return events;
 	}
