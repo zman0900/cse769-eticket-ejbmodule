@@ -15,12 +15,37 @@ import com.cse769.EJB.Entity.EventCategory;
 import com.cse769.EJB.Entity.Ticket;
 import com.cse769.EJB.Entity.Venue;
 
+/**
+ * Stateless session bean for {@link Event}s
+ * 
+ * @author group3
+ */
 @Stateless
 public class EventService {
 
 	@PersistenceContext(unitName = "examples-769-EJB")
 	EntityManager em;
 
+	/**
+	 * Creates and stores a new {@link Event} with the specified attributes.
+	 * Also generates a number of {@link Ticket}s for the event as specified by
+	 * the quantity attribute.
+	 * 
+	 * @param name
+	 *            a name
+	 * @param category
+	 *            a {@link Category}
+	 * @param description
+	 *            a description
+	 * @param cost
+	 *            the cost in <i><b>cents</b></i>
+	 * @param date
+	 *            the date
+	 * @param quantity
+	 *            the total number of seats offered
+	 * @param venue
+	 *            the {@link Venue}
+	 */
 	public void createEvent(String name, EventCategory category,
 			String description, int cost, Date date, int quantity, Venue venue) {
 		Event event = new Event();
@@ -44,15 +69,35 @@ public class EventService {
 		em.persist(event);
 	}
 
+	/**
+	 * Returns the {@link Event} with the specified id
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the {@link Event}
+	 */
 	public Event getEventById(Long id) {
 		return em.find(Event.class, id);
 	}
 
+	/**
+	 * Deletes the {@link Event} with the specified id
+	 * 
+	 * @param id
+	 *            the id
+	 */
 	public void removeEvent(Long id) {
 		Event ev = em.find(Event.class, id);
 		em.remove(ev);
 	}
 
+	/**
+	 * Modifies the specified {@link Event}. The id should not be changed and
+	 * should already exist.
+	 * 
+	 * @param ev
+	 *            the {@link Event}
+	 */
 	public void updateEvent(Event ev) {
 		em.getTransaction().begin();
 		Event newEvent = em.find(Event.class, ev.getEventId());
@@ -66,13 +111,27 @@ public class EventService {
 		em.getTransaction().commit();
 	}
 
+	/**
+	 * Returns the {@link List} of all {@link Event}s
+	 * 
+	 * @return the {@link List} of all {@link Event}s
+	 */
 	public List<Event> getAllEvents() {
 		List<Event> events = em.createQuery("SELECT e from Event e",
 				Event.class).getResultList();
 		return events;
 	}
 
-	// Not used?
+	// Not used
+	/**
+	 * Returns the {@link List} of {@link Event}s with a name exactly as
+	 * specified. Using {@link #searchEventsByName(String)} is probably a better
+	 * idea.
+	 * 
+	 * @param event
+	 *            the event name
+	 * @return the {@link List} of {@link Event}s
+	 */
 	public List<Event> findEventsByName(String event) {
 		final String query = "SELECT e FROM Event e WHERE e.name = :name";
 		final String name = event;
@@ -82,6 +141,14 @@ public class EventService {
 		return events;
 	}
 
+	/**
+	 * Returns the {@link List} of {@link Event}s with a name containing the
+	 * specified search string. Case insensitive.
+	 * 
+	 * @param search
+	 *            the search string
+	 * @return the {@link List} of {@link Event}s
+	 */
 	public List<Event> searchEventsByName(String search) {
 		final String query = "SELECT e FROM Event e WHERE upper(e.name) LIKE upper(:name)";
 		final String name = "%" + search + "%";
@@ -91,6 +158,12 @@ public class EventService {
 		return events;
 	}
 
+	/**
+	 * Creates some demo {@link Event}s, and the {@link EventCategory}s and
+	 * {@link Venue}s necessary to do so
+	 * 
+	 * @return true if created
+	 */
 	public boolean createDemoEvents() {
 		EventCategory sports = new EventCategory();
 		sports.setCategory("Sports");
@@ -136,7 +209,12 @@ public class EventService {
 		return true;
 	}
 
-	// Not used?
+	/**
+	 * Not needed, don't use
+	 * 
+	 * @deprecated Use {@link #findEventsByCategoryId(Long)}
+	 */
+	@Deprecated
 	public List<Event> findEventsByCategory(String category) {
 		final String query = "SELECT e FROM Event e WHERE e.category.category = :categoryName";
 		final String categoryName = category;
@@ -146,6 +224,14 @@ public class EventService {
 		return events;
 	}
 
+	/**
+	 * Returns the {@link List} of {@link Event}s with the specified
+	 * {@link EventCategory} id
+	 * 
+	 * @param id
+	 *            the {@link EventCategory} id
+	 * @return the {@link List} of {@link Event}s
+	 */
 	public List<Event> findEventsByCategoryId(Long id) {
 		final String query = "SELECT e FROM Event e WHERE e.category.categoryId = :categoryId";
 		final Long categoryId = id;
@@ -155,7 +241,12 @@ public class EventService {
 		return events;
 	}
 
-	// Not used?
+	/**
+	 * Not needed, don't use
+	 * 
+	 * @deprecated Use {@link #findEventsByVenueId(Long)}
+	 */
+	@Deprecated
 	public List<Event> findEventsByVenue(String venue) {
 		final String query = "SELECT e FROM Event e WHERE e.venue.name = :venueName";
 		final String venueName = venue;
@@ -165,6 +256,14 @@ public class EventService {
 		return events;
 	}
 
+	/**
+	 * Returns the {@link List} of {@link Event}s with the specified
+	 * {@link Venue} id
+	 * 
+	 * @param id
+	 *            the {@link Venue} id
+	 * @return the {@link List} of {@link Event}s
+	 */
 	public List<Event> findEventsByVenueId(Long id) {
 		final String query = "SELECT e FROM Event e WHERE e.venue.venueId = :venueId";
 		final Long venueId = id;
@@ -174,6 +273,14 @@ public class EventService {
 		return events;
 	}
 
+	/**
+	 * Returns the number of unsold {@link Ticket}s for the {@link Event} with
+	 * the specified id
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the number of unsold {@link Ticket}s
+	 */
 	public Long getNumOfAvailableTickets(Long id) {
 		final String query = "SELECT COUNT(t) FROM Ticket t WHERE t.event.eventId = :eventId AND t.soldFlag = false";
 		final Long eventId = id;
